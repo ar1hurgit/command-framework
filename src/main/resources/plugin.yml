@@ -1,0 +1,7 @@
+name: MyPlugin
+version: '1.0.0'
+main: me.ar1hurgit.commandframework.CommandFrameworkPlugin
+api-version: '1.21'
+description: A plugin for managing commands
+authors:
+  - Arthur

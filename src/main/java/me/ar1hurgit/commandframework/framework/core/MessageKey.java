@@ -1,0 +1,16 @@
+package me.ar1hurgit.commandframework.framework.core;
+
+public enum MessageKey {
+    NO_PERMISSION,
+    INVALID_ARGUMENT_COUNT,
+    INVALID_ARGUMENT_TYPE,
+    INVALID_SENDER,
+    PLAYER_NOT_FOUND,
+    COOLDOWN_ACTIVE,
+    VALUE_OUT_OF_RANGE,
+    UNKNOWN_SUBCOMMAND,
+    COMMAND_FAILED,
+    HELP_HEADER,
+    HELP_ENTRY,
+    HELP_EMPTY
+}

@@ -1,0 +1,95 @@
+plugins {
+    id 'java-library'
+    id 'maven-publish'
+    id 'xyz.jpenilla.run-paper' version '2.3.1'
+}
+
+group = 'me.ar1hurgit'
+version = '1.0.0-SNAPSHOT'
+description = 'Modern annotation-driven command framework for Paper and Spigot.'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = uri('https://repo.papermc.io/repository/maven-public/')
+    }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+    options.compilerArgs += '-parameters'
+}
+
+tasks.runServer {
+    minecraftVersion('1.21.1')
+}
+
+jar {
+    archiveBaseName = 'command-framework'
+
+    manifest {
+        attributes(
+                'Implementation-Title': 'Command Framework',
+                'Implementation-Version': project.version
+        )
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifactId = 'command-framework'
+
+            pom {
+                name = 'Command Framework'
+                description = project.description
+                url = 'https://github.com/ar1hurgit/command-framework'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://opensource.org/licenses/MIT'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = 'ar1hurgit'
+                        name = 'Arthur'
+                    }
+                }
+            }
+        }
+    }
+}
+
+processResources {
+    def props = [
+            version    : project.version,
+            name       : 'CommandFramework',
+            description: project.description
+    ]
+
+    inputs.properties(props)
+    filteringCharset = 'UTF-8'
+
+    filesMatching('plugin.yml') {
+        expand(props)
+    }
+}
