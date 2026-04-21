@@ -192,12 +192,6 @@ Pour compiler le projet localement :
 .\gradlew.bat build
 ```
 
-Pour lancer une publication locale Maven :
-
-```powershell
-.\gradlew.bat publishToMavenLocal
-```
-
 ## Support
 
 - Email : `arthurdk0805@gmail.com`
